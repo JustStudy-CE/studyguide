@@ -114,7 +114,7 @@
     }), 1e3));
     var a = function() {
             var e = window.pokiSDKVersion || t("ab") || "baeb385ae52d1fe15574a1f68cfa8d3a444a190a",
-                i = "scripts/baeb385ae52d1fe15574a1f68cfa8d3a444a190a/poki-sdk-core-.js";
+                i = "poki-sdk-core-.js";
             n && (i = "poki-sdk-kids-".concat(e, ".js")), o && (i = "scripts/baeb385ae52d1fe15574a1f68cfa8d3a444a190a/poki-sdk-playground-".concat(e, ".js")), r && (i = "scripts/baeb385ae52d1fe15574a1f68cfa8d3a444a190a/poki-sdk-hoist-".concat(e, ".js"));
             new URL(document.currentScript.src);
             return "scripts/".concat(e, "/").concat(i)
