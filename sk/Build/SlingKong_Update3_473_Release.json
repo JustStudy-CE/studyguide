@@ -4,7 +4,7 @@
 "productVersion": "3.16.1",
 "dataUrl": "SlingKong_Update3_473_Release.data.unityweb",
 "wasmCodeUrl": "SlingKong_Update3_473_Release.wasm.code.unityweb",
-"wasmFrameworkUrl": "SlingKong_Update3_473_Release.wasm.framework.unityweb",
+"wasmFrameworkUrl": "SlingKong_Update3_473_Release.wasm.framework.js",
 "graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
 "splashScreenStyle": "Dark",
