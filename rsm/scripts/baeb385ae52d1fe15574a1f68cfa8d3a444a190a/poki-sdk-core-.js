@@ -5572,6 +5572,7 @@
         try {
             var Li = function(e) {
                 var t = console[e];
+                console.log(e)
                 console[e] = function() {
                     for (var n = [], i = 0; i < arguments.length; i++)
                         n[i] = arguments[i];

@@ -5533,15 +5533,7 @@ var JSEvents = {
   },
 };
 function _dmSysOpenURL(url, target) {
-  var jsurl = UTF8ToString(url);
-  var jstarget = UTF8ToString(target);
-  if (jstarget == 0) {
-    jstarget = "_self";
-  }
-  if (window.open(jsurl, jstarget) == null) {
-    window.location = jsurl;
-  }
-  return true;
+  console.log("tried to redirect to" + url);
 }
 function _emscripten_asm_const_int(code, sigPtr, argbuf) {
   var args = readAsmConstArgs(sigPtr, argbuf);

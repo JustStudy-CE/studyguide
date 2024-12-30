@@ -3,7 +3,7 @@
 "productName": "Roller Coaster Builder",
 "dataUrl": "PokiWebGL.data.unityweb?v=1",
 "wasmCodeUrl": "PokiWebGL.wasm.code.unityweb?v=1",
-"wasmFrameworkUrl": "PokiWebGL.wasm.framework.unityweb?v=1",
+"wasmFrameworkUrl": "PokiWebGL.wasm.framework.js?v=1",
 "asmCodeUrl": "PokiWebGL.asm.code.unityweb?v=1",
 "asmMemoryUrl": "PokiWebGL.asm.memory.unityweb?v=1",
 "asmFrameworkUrl": "PokiWebGL.asm.framework.unityweb?v=1",

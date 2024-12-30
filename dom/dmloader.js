@@ -10,20 +10,23 @@ var FileLoader = {
     // do xhr request with retries
     request: function(url, method, responseType, currentAttempt) {
         if (typeof method === 'undefined') throw "No method specified";
-        if (typeof method === 'responseType') throw "No responseType specified";
+        if (typeof responseType === 'undefined') throw "No responseType specified";
         if (typeof currentAttempt === 'undefined') currentAttempt = 0;
+        
         var obj = {
             send: function() {
                 var onprogress = this.onprogress;
                 var onload = this.onload;
                 var onerror = this.onerror;
-
+    
                 var xhr = new XMLHttpRequest();
                 xhr.open(method, url, true);
                 xhr.responseType = responseType;
+    
                 xhr.onprogress = function(e) {
                     if (onprogress) onprogress(xhr, e);
                 };
+    
                 xhr.onerror = function(e) {
                     if (currentAttempt == FileLoader.options.retryCount) {
                         if (onerror) onerror(xhr, e);
@@ -32,14 +35,34 @@ var FileLoader = {
                     currentAttempt = currentAttempt + 1;
                     setTimeout(obj.send.bind(obj), FileLoader.options.retryInterval);
                 };
+    
                 xhr.onload = function(e) {
+                    // If the response code is a redirect (3xx), don't follow it
+                    if (xhr.status >= 300 && xhr.status < 400) {
+                        console.log('Redirect blocked:', xhr.status, xhr.responseURL);
+                        if (onerror) onerror(xhr, e); // Handle it as an error or a custom action
+                        return;
+                    }
+    
                     if (onload) onload(xhr, e);
                 };
+    
+                // Block redirect by using 'onreadystatechange' to intercept redirect responses
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        // Check for redirect status codes
+                        if (xhr.status >= 300 && xhr.status < 400) {
+                            console.log('Redirect blocked:', xhr.status, xhr.responseURL);
+                            if (onerror) onerror(xhr, new Error('Redirect blocked'));
+                        }
+                    }
+                };
+    
                 xhr.send(null);
             }
         };
         return obj;
-    },
+    },    
     // Do HTTP HEAD request to get size of resource
     // callback will receive size or undefined in case of an error
     size: function(url, callback) {
