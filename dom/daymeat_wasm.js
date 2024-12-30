@@ -122,6 +122,7 @@ if (ENVIRONMENT_IS_NODE) {
       var xhr = new XMLHttpRequest();
       xhr.open("GET", url, false);
       xhr.send(null);
+      console.warn(url)
       return xhr.responseText;
     };
     if (ENVIRONMENT_IS_WORKER) {
@@ -796,6 +797,7 @@ var PokiSdk = {
   _shareableURLCallback: function (url) {
     var url_arr = intArrayFromString(url, true);
     var _url = allocate(url_arr, ALLOC_NORMAL);
+    console.log('Requesting URL:', url);
     wasmTable.get(PokiSdk._urlCallback)(_url, url_arr.length);
     Module._free(_url);
   },
@@ -4285,6 +4287,7 @@ var SOCKFS = {
           var runtimeConfig =
             Module["websocket"] && "object" === typeof Module["websocket"];
           var url = "ws:#".replace("#", "//");
+          console.log('Requesting URL:', url);
           if (runtimeConfig) {
             if ("string" === typeof Module["websocket"]["url"]) {
               url = Module["websocket"]["url"];
@@ -5801,6 +5804,7 @@ var Browser = {
         b = bb.getBlob();
       }
       var url = Browser.URLObject.createObjectURL(b);
+      console.log('Requesting URL:', url);
       var img = new Image();
       img.onload = function img_onload() {
         assert(img.complete, "Image " + name + " could not be decoded");
@@ -5853,6 +5857,7 @@ var Browser = {
           return fail();
         }
         var url = Browser.URLObject.createObjectURL(b);
+        console.log('Requesting URL:', url);
         var audio = new Audio();
         audio.addEventListener(
           "canplaythrough",

@@ -363,6 +363,7 @@ var GameArchiveLoader = {
         var total = 0;
         var downloaded = 0;
         var url = this._archiveLocationFilter('/' + piece.name);
+        console.warn("got url in dmloader: " + url);
 
         FileLoader.load(
             url, "arraybuffer", undefined,
