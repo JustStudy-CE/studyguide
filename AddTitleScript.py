@@ -24,11 +24,16 @@ for i in range(folder_count):
                 lines = file.readlines()
                 
                 for line_num, line in enumerate(lines):
-                    if line.strip().startswith("<head>") and not any(line.strip() == '<link rel="shortcut icon" id="favi" href="">' for line in lines[line_num + 1:]):
+                    if line.strip().startswith("<head>"): #and not any(line.strip() == '<link rel="shortcut icon" id="favi" href="">' for line in lines[line_num + 1:]):
+                        # this is just for the title
                         if not any(line.strip() == '<link rel="shortcut icon" id="favi" href="">' for line in lines[line_num + 1:]):
                             lines.insert(line_num + 1, '<link rel="shortcut icon" id="favi" href="">\n')
+                        #this is for the analytics. if you want me to remove em you can just set the <script> part to ""
+                        if not any(line.strip() == '<script async src="https://www.googletagmanager.com/gtag/js?id=G-KW15Q1QG97"></script>' for line in lines[line_num + 1:]):
+                            lines.insert(line_num + 2, '<script async src="https://www.googletagmanager.com/gtag/js?id=G-KW15Q1QG97"></script>\n')
+                        # this is for the accuall loading data and also the script that starts the analytics i think..
                         if not any(line.strip() == '<script type="text/javascript" src="/assets/js/LoadData.js"></script>' for line in lines[line_num + 1:]):
-                            lines.insert(line_num + 2, '<script type="text/javascript" src="/assets/js/LoadData.js"></script>\n')
+                            lines.insert(line_num + 3, '<script type="text/javascript" src="/assets/js/LoadData.js"></script>\n')
                         break
                     
                     if line.strip().startswith("<title>"):
